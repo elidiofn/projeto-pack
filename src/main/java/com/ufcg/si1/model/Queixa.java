@@ -1,7 +1,6 @@
 package com.ufcg.si1.model;
 
 import exceptions.ObjetoInvalidoException;
-import org.springframework.http.ResponseEntity;
 
 public class Queixa {
 

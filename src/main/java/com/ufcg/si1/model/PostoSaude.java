@@ -2,13 +2,13 @@ package com.ufcg.si1.model;
 
 
 public class PostoSaude extends UnidadeSaude{
-    private int atendentes;
-
+	
+	private String nome;
     private float taxaDiariaAtendimentos;
 
-    public PostoSaude(String descricao, int at, int taxa) {
+    public PostoSaude(String descricao, int at, int taxa, String nome) {
         super(descricao);
-        this.atendentes = at;
+        this.nome = nome;
         this.taxaDiariaAtendimentos = taxa;
     }
 
@@ -16,17 +16,18 @@ public class PostoSaude extends UnidadeSaude{
         super();
     }
 
-    // implementacoes vazias
-    public int getAtendentes() {
-        return atendentes;
+    public String getNome(){
+    	return nome;
     }
+    
+    public void setNome(String nome){
+    	this.nome = nome;
+    }
+    
+    // implementacoes vazias
 
     public float taxaDiaria() {
         return taxaDiariaAtendimentos;
-    }
-
-    public void setAtendentes(int atendentes) {
-        this.atendentes = atendentes;
     }
 
     public float getTaxaDiariaAtendimentos() {

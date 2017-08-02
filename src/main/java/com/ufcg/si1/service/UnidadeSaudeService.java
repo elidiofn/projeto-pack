@@ -8,13 +8,11 @@ import java.util.List;
 
 
 public interface UnidadeSaudeService {
-    Object procura(int codigo) throws Rep,
-            ObjetoInexistenteException;
+    Object procura(int codigo) throws Rep, ObjetoInexistenteException;
 
     List<Object> getAll();
 
-    void insere(Object us)throws Rep,
-            ObjetoJaExistenteException;
+    void insere(Object us)throws Rep, ObjetoJaExistenteException;
 
     boolean existe(int codigo);
 

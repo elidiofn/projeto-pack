@@ -85,21 +85,18 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
 
     @Override
     public boolean existe(int codigo) {
-        int indiceAux = 0;
         boolean existe = false;
 
         for (int i = 0; i < indice; i++) {
             if (this.vetor[i] instanceof UnidadeSaude){
                 UnidadeSaude unidadeSaude = (UnidadeSaude) vetor[i];
                 if (unidadeSaude.pegaCodigo() == codigo){
-                    indiceAux = i;
                     existe = true;
                     break;
                 }
             }else if (this.vetor[i] instanceof Hospital){
                 Hospital hospital = (Hospital) vetor[i];
                 if (hospital.getCodigo() == codigo){
-                    indiceAux = i;
                     existe = true;
                     break;
                 }
