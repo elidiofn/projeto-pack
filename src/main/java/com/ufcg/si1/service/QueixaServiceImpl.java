@@ -69,12 +69,6 @@ public class QueixaServiceImpl implements QueixaService {
     }
 
     @Override
-    //este metodo nunca eh chamado, mas se precisar estah aqui
-    public int size() {
-        return queixas.size();
-    }
-
-    @Override
     public Iterator<Queixa> getIterator() {
         return queixas.iterator();
     }
@@ -91,6 +85,12 @@ public class QueixaServiceImpl implements QueixaService {
         }
         return null;
     }
+
+	@Override
+	public int size() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 
 

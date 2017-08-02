@@ -52,21 +52,12 @@ public class RestApiController {
     @RequestMapping(value = "/queixa/", method = RequestMethod.POST)
     public ResponseEntity<?> abrirQueixa(@RequestBody Queixa queixa, UriComponentsBuilder ucBuilder) {
 
-        //este codigo estava aqui, mas nao precisa mais
-        /*if (queixaService.doesQueixaExist(queixa)) {
-			return new ResponseEntity(new CustomErrorType("Esta queixa já existe+
-					queixa.pegaDescricao()),HttpStatus.CONFLICT);
-		}*/
-
         try {
             queixa.abrir();
         } catch (ObjetoInvalidoException e) {
             return new ResponseEntity<List>(HttpStatus.BAD_REQUEST);
         }
         queixaService.saveQueixa(queixa);
-
-       // HttpHeaders headers = new HttpHeaders();
-        //headers.setLocation(ucBuilder.path("/api/queixa/{id}").buildAndExpand(queixa.getId()).toUri());
 
         return new ResponseEntity<Queixa>(queixa, HttpStatus.CREATED);
     }
