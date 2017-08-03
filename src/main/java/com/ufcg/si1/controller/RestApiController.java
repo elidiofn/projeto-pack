@@ -26,14 +26,10 @@ public class RestApiController {
     QueixaService queixaService = new QueixaServiceImpl();
     EspecialidadeService especialidadeService = new EspecialidadeServiceImpl();
     UnidadeSaudeService unidadeSaudeService = new UnidadeSaudeServiceImpl();
-	public static final int SITUACAOPREFEITURANORMAL = 0;
-	public static final int SITUACAOPREFEITURAEXTRA = 1;
-	public static final int SITUACAOATUALRUIM = 0;
-	public static final int SITUACAOATUALREGULAR = 1;
-	public static final int SITUACAOATUALBOA = 2;
-	
+	public static final int SITUACAO_PREFEITURA_NORMAL = 0;
+	public static final int SITUACAO_PREFEITURA_EXTRA = 1;
 
-    private int situacaoAtualPrefeitura = SITUACAOPREFEITURANORMAL;
+    private int situacaoAtualPrefeitura = SITUACAO_PREFEITURA_NORMAL;
 
 
     // -------------------Retrieve All Complaints---------------------------------------------
@@ -213,7 +209,7 @@ public class RestApiController {
         // dependendo da situacao da prefeitura, o criterio de avaliacao muda
         // se normal, mais de 20% abertas eh ruim, mais de 10 eh regular
         // se extra, mais de 10% abertas eh ruim, mais de 5% eh regular
-        if (situacaoAtualPrefeitura == SITUACAOPREFEITURANORMAL) {
+        if (situacaoAtualPrefeitura == SITUACAO_PREFEITURA_NORMAL) {
             if ((double) numeroQueixasAbertas() / queixaService.findAllQueixas().size() > 0.2) {
                 return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(0), HttpStatus.OK);
             } else {
@@ -222,7 +218,7 @@ public class RestApiController {
                 }
             } 
         }
-        if (this.situacaoAtualPrefeitura == SITUACAOPREFEITURAEXTRA) {
+        if (this.situacaoAtualPrefeitura == SITUACAO_PREFEITURA_EXTRA) {
             if ((double) numeroQueixasAbertas() / queixaService.findAllQueixas().size() > 0.1) {
                 return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(0), HttpStatus.OK);
             } else {

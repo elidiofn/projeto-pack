@@ -29,7 +29,11 @@ public class Queixa {
 		this.descricao = descricao;
 		this.situacao = situacao;
 		this.comentario = comentario;
-		this.solicitante = new Pessoa(nome, email, rua, uf, cidade);
+		Endereco endereco = new Endereco();
+		endereco.setRua(rua);
+		endereco.setUf(uf);
+		endereco.setCidade(cidade);
+		this.solicitante = new Pessoa(nome, email, endereco);
 	}
 
 	public long getId() {

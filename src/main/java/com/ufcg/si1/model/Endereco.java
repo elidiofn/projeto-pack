@@ -29,4 +29,17 @@ public class Endereco {
 	public String getCidade() {
 		return this.cidade;
 	}
+
+	public void setRua(String rua) {
+		this.rua = rua;
+	}
+
+	public void setUf(String uf) {
+		this.uf = uf;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+	
 }
