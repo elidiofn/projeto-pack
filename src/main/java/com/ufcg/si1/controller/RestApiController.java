@@ -1,6 +1,5 @@
 package com.ufcg.si1.controller;
 
-import br.edu.ufcg.Hospital;
 import com.ufcg.si1.model.*;
 import com.ufcg.si1.service.*;
 import com.ufcg.si1.util.CustomErrorType;
@@ -27,11 +26,14 @@ public class RestApiController {
     QueixaService queixaService = new QueixaServiceImpl();
     EspecialidadeService especialidadeService = new EspecialidadeServiceImpl();
     UnidadeSaudeService unidadeSaudeService = new UnidadeSaudeServiceImpl();
+	public static final int SITUACAOPREFEITURANORMAL = 0;
+	public static final int SITUACAOPREFEITURAEXTRA = 1;
+	public static final int SITUACAOATUALRUIM = 0;
+	public static final int SITUACAOATUALREGULAR = 1;
+	public static final int SITUACAOATUALBOA = 2;
+	
 
-    /* situação normal =0
-       situação extra =1
-     */
-    private int situacaoAtualPrefeitura = 0;
+    private int situacaoAtualPrefeitura = SITUACAOPREFEITURANORMAL;
 
 
     // -------------------Retrieve All Complaints---------------------------------------------
@@ -211,7 +213,7 @@ public class RestApiController {
         // dependendo da situacao da prefeitura, o criterio de avaliacao muda
         // se normal, mais de 20% abertas eh ruim, mais de 10 eh regular
         // se extra, mais de 10% abertas eh ruim, mais de 5% eh regular
-        if (situacaoAtualPrefeitura == 0) {
+        if (situacaoAtualPrefeitura == SITUACAOPREFEITURANORMAL) {
             if ((double) numeroQueixasAbertas() / queixaService.findAllQueixas().size() > 0.2) {
                 return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(0), HttpStatus.OK);
             } else {
@@ -220,7 +222,7 @@ public class RestApiController {
                 }
             } 
         }
-        if (this.situacaoAtualPrefeitura == 1) {
+        if (this.situacaoAtualPrefeitura == SITUACAOPREFEITURAEXTRA) {
             if ((double) numeroQueixasAbertas() / queixaService.findAllQueixas().size() > 0.1) {
                 return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(0), HttpStatus.OK);
             } else {
