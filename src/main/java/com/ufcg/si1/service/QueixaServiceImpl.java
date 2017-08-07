@@ -85,6 +85,17 @@ public class QueixaServiceImpl implements QueixaService {
         }
         return null;
     }
+    
+    public double numeroQueixasAbertas() {
+        int contador = 0;
+        for (int i = 0; i < queixas.size() -1; i++) {
+			       
+            if (i.getSituacao() == Queixa.ABERTA)
+                contador++;
+        }
+
+        return contador;
+    }
 
 
 

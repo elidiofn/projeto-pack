@@ -210,19 +210,19 @@ public class RestApiController {
         // se normal, mais de 20% abertas eh ruim, mais de 10 eh regular
         // se extra, mais de 10% abertas eh ruim, mais de 5% eh regular
         if (situacaoAtualPrefeitura == SITUACAO_PREFEITURA_NORMAL) {
-            if ((double) numeroQueixasAbertas() / queixaService.findAllQueixas().size() > 0.2) {
+            if ((double) queixaService.numeroQueixasAbertas() / queixaService.findAllQueixas().size() > 0.2) {
                 return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(0), HttpStatus.OK);
             } else {
-                if ((double) numeroQueixasAbertas() / queixaService.findAllQueixas().size() > 0.1) {
+                if ((double) queixaService.numeroQueixasAbertas() / queixaService.findAllQueixas().size() > 0.1) {
                     return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(1), HttpStatus.OK);
                 }
             } 
         }
         if (this.situacaoAtualPrefeitura == SITUACAO_PREFEITURA_EXTRA) {
-            if ((double) numeroQueixasAbertas() / queixaService.findAllQueixas().size() > 0.1) {
+            if ((double) queixaService.numeroQueixasAbertas() / queixaService.findAllQueixas().size() > 0.1) {
                 return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(0), HttpStatus.OK);
             } else {
-                if ((double) numeroQueixasAbertas() / queixaService.findAllQueixas().size() > 0.05) {
+                if ((double) queixaService.numeroQueixasAbertas() / queixaService.findAllQueixas().size() > 0.05) {
                     return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(1), HttpStatus.OK);
                 }
             }
@@ -246,17 +246,7 @@ public class RestApiController {
         return new ResponseEntity<UnidadeSaude>((UnidadeSaude) us, HttpStatus.OK);
     }
 
-    private double numeroQueixasAbertas() {
-        int contador = 0;
-        Iterator<Queixa> it = queixaService.getIterator();
-        for (Iterator<Queixa> it1 = it; it1.hasNext(); ) {
-            Queixa q = it1.next();
-            if (q.getSituacao() == Queixa.ABERTA)
-                contador++;
-        }
-
-        return contador;
-    }
+   
 
 }
 

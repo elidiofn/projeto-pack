@@ -20,4 +20,6 @@ public interface QueixaService {
 
 	Iterator<Queixa> getIterator();
 	
+	double numeroQueixasAbertas();
+	
 }
