@@ -2,7 +2,6 @@ package com.ufcg.si1.model;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +12,12 @@ import java.util.List;
 public class UnidadeSaude {
     private int codigo;
 
+    private Endereco endereco;
+    
+    private String nome;
     private String descricao;
 
-    private List<Especialidade> especialidades = new ArrayList<Especialidade>();
+    private List especialidades = new ArrayList();
 
     private long [] numeroQueixas = new long[1000];
     int contador = 0;
@@ -24,10 +26,17 @@ public class UnidadeSaude {
         this.codigo = 0; // gerado no repositorio
         this.descricao = descricao;
     }
-    public UnidadeSaude(){
+    public UnidadeSaude(Endereco endereco, int codigo, String descricao, String nome){
+    	this.endereco = endereco;
+    	this.codigo =codigo;
+    	this.nome= nome;
+    	
     }
 
-    public void addQueixaProxima(long id) {
+    public UnidadeSaude() {
+		// TODO Auto-generated constructor stub
+	}
+	public void addQueixaProxima(long id) {
         if (this instanceof PostoSaude){
             numeroQueixas[contador++] = id;
         }
