@@ -7,15 +7,23 @@ public class Endereco {
 	private String uf;
 
 	private String cidade;
+	
+	private String bairro;
 
 	public Endereco(){
 
 	}
 
-	public Endereco(String rua, String uf, String cidade) {
+	public Endereco(String rua, String uf, String cidade, String bairro) {
 		this.rua = rua;
+		this.bairro = bairro;
 		this.uf = uf;
 		this.cidade = cidade;
+	}
+	
+	public Endereco(String rua, String bairro){
+		this.rua = rua;
+		this.bairro = bairro;
 	}
 
 	public String getRua() {
@@ -29,17 +37,8 @@ public class Endereco {
 	public String getCidade() {
 		return this.cidade;
 	}
-
-	public void setRua(String rua) {
-		this.rua = rua;
-	}
-
-	public void setUf(String uf) {
-		this.uf = uf;
-	}
-
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
 	
+	public String getBairro(){
+		return this.bairro;
+	}
 }
