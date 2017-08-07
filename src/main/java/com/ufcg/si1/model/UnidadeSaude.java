@@ -26,10 +26,11 @@ public class UnidadeSaude {
         this.codigo = 0; // gerado no repositorio
         this.descricao = descricao;
     }
-    public UnidadeSaude(Endereco endereco, int codigo, String descricao, String nome){
-    	this.endereco = endereco;
-    	this.codigo =codigo;
+    public UnidadeSaude(String rua, String bairro,  String descricao, String nome){
+    	
+    	this.endereco = new Endereco(rua, bairro);
     	this.nome= nome;
+    	this.descricao = descricao;
     	
     }
 
