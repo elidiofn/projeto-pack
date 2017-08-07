@@ -88,9 +88,9 @@ public class QueixaServiceImpl implements QueixaService {
     
     public double numeroQueixasAbertas() {
         int contador = 0;
-        for (int i = 0; i < queixas.size() -1; i++) {
-			       
-            if (i.getSituacao() == Queixa.ABERTA)
+        for (Iterator<Queixa> it1 = getIterator() ; it1.hasNext(); ) {
+            Queixa q = it1.next();
+            if (q.getSituacao() == Queixa.ABERTA)
                 contador++;
         }
 
