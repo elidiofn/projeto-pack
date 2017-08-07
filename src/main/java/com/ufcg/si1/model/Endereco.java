@@ -41,4 +41,21 @@ public class Endereco {
 	public String getBairro(){
 		return this.bairro;
 	}
+	
+	
+	public void setCidade(String cidade){
+		this.cidade= cidade;
+	}
+	
+	public void setUf(String uf){
+		this.uf= uf;
+	}
+	
+	public void setRua(String rua){
+		this.rua= rua;
+	}
+	
+	public void setBairro(String bairo){
+		this.bairro= bairro;
+	}
 }
