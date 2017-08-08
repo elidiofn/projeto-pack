@@ -33,12 +33,6 @@ public class UnidadeSaude {
     	
     	
     }
-
-	public void addQueixaProxima(long id) {
-        if (this instanceof PostoSaude){
-            numeroQueixas[contador++] = id;
-        }
-    }
 	
 	public String getBairro() {
 		return endereco.getBairro();
