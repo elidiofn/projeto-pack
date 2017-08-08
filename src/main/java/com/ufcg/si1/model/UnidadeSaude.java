@@ -15,42 +15,36 @@ public class UnidadeSaude {
     private Endereco endereco;
     
     private String nome;
-    private String descricao;
+    
 
     private List especialidades = new ArrayList();
 
     private long [] numeroQueixas = new long[1000];
     int contador = 0;
 
-    public UnidadeSaude(String descricao) {
+    public UnidadeSaude(String nome) {
         this.codigo = 0; // gerado no repositorio
-        this.descricao = descricao;
+        this.setNome(nome);
     }
-    public UnidadeSaude(String rua, String bairro,  String descricao, String nome){
+    public UnidadeSaude(String rua, String bairro, String nome){
     	
     	this.endereco = new Endereco(rua, bairro);
-    	this.nome= nome;
-    	this.descricao = descricao;
+    	this.setNome(nome);
+    	
     	
     }
 
-    public UnidadeSaude() {
-		// TODO Auto-generated constructor stub
-	}
 	public void addQueixaProxima(long id) {
         if (this instanceof PostoSaude){
             numeroQueixas[contador++] = id;
         }
     }
+	
+	public String getBairro() {
+		return endereco.getBairro();
+	}
 
-    public String pegaDescricao() {
-        return this.descricao;
-    }
-
-    public void mudaDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
+ 
     public List<Especialidade> getEspecialidades() {
         return this.especialidades;
     }
@@ -66,5 +60,11 @@ public class UnidadeSaude {
     public void mudaCodigo(int cod) {
         this.codigo = cod;
     }
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
 }

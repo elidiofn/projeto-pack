@@ -60,16 +60,7 @@ public class RestApiController {
         return new ResponseEntity<Queixa>(queixa, HttpStatus.CREATED);
     }
     
-    
-
-    @RequestMapping(value = "/unit/", method = RequestMethod.POST)
-    public ResponseEntity<?> criarUnidade(@RequestBody UnidadeSaude unit) {
-
-
-        return new ResponseEntity<UnidadeSaude>(unit, HttpStatus.CREATED);
-    }
-    
-    
+     
 
 
     @RequestMapping(value = "/queixa/{id}", method = RequestMethod.GET)

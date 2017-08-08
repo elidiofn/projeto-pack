@@ -128,7 +128,7 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
         for (Object esp: vetor) {
             if (esp instanceof UnidadeSaude){;
                 UnidadeSaude u = (UnidadeSaude) esp;
-                if (u.pegaDescricao().equals(bairro)){
+                if (u.getBairro().equals(bairro)){
                     return esp;
                 }
             } else if (esp instanceof Hospital){
