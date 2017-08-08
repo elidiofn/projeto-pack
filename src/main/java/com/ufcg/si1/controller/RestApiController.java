@@ -60,6 +60,15 @@ public class RestApiController {
         return new ResponseEntity<Queixa>(queixa, HttpStatus.CREATED);
     }
     
+    @RequestMapping(value = "/unit/", method = RequestMethod.POST)
+    public ResponseEntity<?> CriarUnidade(@RequestBody UnidadeSaude unit, UriComponentsBuilder ucBuilder) {
+
+       
+
+        return new ResponseEntity<UnidadeSaude>(unit, HttpStatus.CREATED);
+    }
+    
+    
      
 
 
@@ -137,7 +146,8 @@ public class RestApiController {
     @RequestMapping(value = "/unidade/", method = RequestMethod.GET)
     public ResponseEntity<?> getAllUnidades() {
         List<Object> unidades = unidadeSaudeService.getAll();
-        if (unidades.isEmpty()) return new ResponseEntity<List>(HttpStatus.NOT_FOUND);
+        if (unidades.isEmpty()) 
+        	return new ResponseEntity<List>(HttpStatus.NOT_FOUND);
         else{
             List<UnidadeSaude> unidadeSaudes = new ArrayList<>();
             for (Object  saude: unidades) {

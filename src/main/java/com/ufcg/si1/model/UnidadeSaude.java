@@ -26,7 +26,7 @@ public class UnidadeSaude {
         this.codigo = 0; // gerado no repositorio
         this.setNome(nome);
     }
-    public UnidadeSaude(String rua, String bairro, String nome){
+    public UnidadeSaude(String nome, String rua, String bairro){
     	
     	this.endereco = new Endereco(rua, bairro);
     	this.setNome(nome);
@@ -42,6 +42,14 @@ public class UnidadeSaude {
 	
 	public String getBairro() {
 		return endereco.getBairro();
+	}
+	
+	public void setRua(String rua) {
+		endereco.setRua(rua);
+	}
+	
+	public void setBairro(String bairro) {
+		endereco.setRua(bairro);
 	}
 
  
