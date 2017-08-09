@@ -20,4 +20,6 @@ public class PostoSaude extends UnidadeSaude{
     public void setTaxaDiariaAtendimentos(float taxaDiariaAtendimentos) {
         this.taxaDiariaAtendimentos = taxaDiariaAtendimentos;
     }
+    
+   
 }
