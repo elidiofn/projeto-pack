@@ -1,6 +1,9 @@
 package com.ufcg.si1.service;
 
 import com.ufcg.si1.model.Queixa;
+import com.ufcg.si1.util.Deserializador;
+import com.ufcg.si1.util.Serializador;
+
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,32 +15,52 @@ import java.util.concurrent.atomic.AtomicLong;
 @Service("queixaService")
 public class QueixaServiceImpl implements QueixaService {
 
-    private static final AtomicLong counter = new AtomicLong();
-
     private static List<Queixa> queixas;
 
     static {
         queixas = populateDummyQueixas();
+        carregarDados();
     }
 
+    public static void carregarDados(){
+    	Deserializador d = new Deserializador();
+    	try{
+    		ArrayList<Queixa> lista= (ArrayList<Queixa>) d.deserializar("./src/arquivos/queixas.bd");
+    		if(lista != null){
+    			queixas =lista;
+    		}
+    	}catch (Exception e) {
+    		System.out.println("Erro"+e.getMessage());
+		}
+    	
+    }
+    public void salvaDados(){
+    	Serializador s = new Serializador();
+    	try {
+			s.serializar("./src/arquivos/queixas.bd", queixas);
+		} catch (Exception e) {
+			System.out.println("Erro"+e.getMessage());
+		}
+    }
+    
     private static List<Queixa> populateDummyQueixas() {
         List<Queixa> queixas = new ArrayList<Queixa>();
 
-        queixas.add(new Queixa(counter.incrementAndGet(), "Passei mal com uma coxinha",
+        queixas.add(new Queixa(queixas.size(), "Passei mal com uma coxinha",
                 Queixa.FECHADA, "", "Jose Silva",
                 "jose@gmail.com", "rua dos tolos", "PE", "Recife"));
 
 
-        queixas.add(new Queixa(counter.incrementAndGet(),
+        queixas.add(new Queixa(queixas.size(),
                 "Bacalhau estragado, passamos mal!", Queixa.FECHADA, "",
                 "Ailton Sousa", "ailton@gmail.com", "rua dos bobos", "PB",
                 "Joao Pessoa"));
 
-        queixas.add(new Queixa(counter.incrementAndGet(), "Nossa rua estah muito suja", Queixa.FECHADA, "",
+        queixas.add(new Queixa(queixas.size(), "Nossa rua estah muito suja", Queixa.FECHADA, "",
                 "Jose Silva", "jose@gmail.com", "rua dos tolos", "PE", "Recife"));
 
 
-        queixas.add(new Queixa(counter.incrementAndGet(), "iluminacao horrivel, muitos assaltos", Queixa.FECHADA, "",
+        queixas.add(new Queixa(queixas.size(), "iluminacao horrivel, muitos assaltos", Queixa.FECHADA, "",
                 "Ailton Sousa", "ailton@gmail.com", "rua dos bobos", "PB",
                 "Joao Pessoa"));
 
@@ -49,8 +72,9 @@ public class QueixaServiceImpl implements QueixaService {
     }
 
     public void saveQueixa(Queixa queixa) {
-        queixa.setId(counter.incrementAndGet());
+        queixa.setId(queixas.size());
         queixas.add(queixa);
+        this.salvaDados();
     }
 
     public void updateQueixa(Queixa queixa) {

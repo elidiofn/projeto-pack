@@ -1,6 +1,8 @@
 package com.ufcg.si1.model;
 
-public class Pessoa {
+import java.io.Serializable;
+
+public class Pessoa implements Serializable{
 	private String nome;
 	private Endereco endereço;
 	private String email;

@@ -2,6 +2,8 @@ package com.ufcg.si1.model;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +11,7 @@ import java.util.List;
 @JsonSubTypes({
         @JsonSubTypes.Type(value = PostoSaude.class, name = "posto")
 })
-public class UnidadeSaude {
+public class UnidadeSaude implements Serializable{
     private int codigo;
 
     private Endereco endereco;

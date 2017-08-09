@@ -1,8 +1,10 @@
 package com.ufcg.si1.model;
 
+import java.io.Serializable;
+
 import exceptions.ObjetoInvalidoException;
 
-public class Queixa {
+public class Queixa implements Serializable{
 
 	private long id;
 

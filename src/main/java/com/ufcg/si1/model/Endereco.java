@@ -1,6 +1,8 @@
 package com.ufcg.si1.model;
 
-public class Endereco {
+import java.io.Serializable;
+
+public class Endereco implements Serializable{
 
 	private String rua;
 
