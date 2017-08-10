@@ -6,7 +6,6 @@ public class HospitalAdapter extends UnidadeSaude{
 	
 	private Hospital hospital;
 	
-	
     private float taxaDiariaAtendimentos;
 
     public HospitalAdapter(String descricao, int taxa, String nome, int medicos, float numAtendimentos) {
@@ -37,5 +36,4 @@ public class HospitalAdapter extends UnidadeSaude{
         this.taxaDiariaAtendimentos = taxaDiariaAtendimentos;
     }
     
-   
 }

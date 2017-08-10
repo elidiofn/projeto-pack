@@ -16,8 +16,7 @@ public class UnidadeSaude implements Serializable{
 
     private Endereco endereco;
     
-    private String nome;
-    
+    private String nome; 
 
     private List especialidades = new ArrayList();
 
@@ -32,8 +31,6 @@ public class UnidadeSaude implements Serializable{
     	
     	this.endereco = new Endereco(rua, bairro);
     	this.setNome(nome);
-    	
-    	
     }
 	
 	public String getBairro() {

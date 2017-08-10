@@ -10,16 +10,15 @@ public class Queixa implements Serializable{
 
 	private String descricao;
 
-	private Pessoa solicitante;
+	protected Pessoa solicitante;
 
-	public int situacao; // usa variaveis estaticas abaixo
-	/* situacoes da queixa */
+	public int situacao; 
+	
 	public static final int ABERTA = 1;
 	public static final int EM_ANDAMENTO = 2;
 	public static final int FECHADA = 3;
 
-	private String comentario = ""; // usado na atualizacao da queixa
-
+	private String comentario = "";
 	public Queixa(){
 		id=0;
 	}
