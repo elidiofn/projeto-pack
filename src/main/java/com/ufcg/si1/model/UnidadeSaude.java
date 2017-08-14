@@ -7,14 +7,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = PostoSaude.class, name = "posto")
-})
+
 public class UnidadeSaude implements Serializable{
     private int codigo;
 
-    private Endereco endereco;
+    private String rua;
+    private String bairro;
     
     private String nome; 
 
@@ -23,29 +21,36 @@ public class UnidadeSaude implements Serializable{
     private long [] numeroQueixas = new long[1000];
     int contador = 0;
 
+   public UnidadeSaude() {
+       
+    }
+    
     public UnidadeSaude(String nome) {
         this.codigo = 0; // gerado no repositorio
         this.setNome(nome);
     }
     public UnidadeSaude(String nome, String rua, String bairro){
     	
-    	this.endereco = new Endereco(rua, bairro);
+    	this.rua =rua;
+    	this.bairro=bairro;
     	this.setNome(nome);
     }
 	
 	public String getBairro() {
-		return endereco.getBairro();
+		return this.bairro;
 	}
 	
 	public void setRua(String rua) {
-		endereco.setRua(rua);
+		this.rua=rua;
 	}
 	
 	public void setBairro(String bairro) {
-		endereco.setRua(bairro);
+		this.bairro=bairro;
 	}
 
- 
+	public String getRua(){
+		return this.rua;
+	}
     public List<Especialidade> getEspecialidades() {
         return this.especialidades;
     }
