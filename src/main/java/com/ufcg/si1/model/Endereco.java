@@ -5,28 +5,16 @@ import java.io.Serializable;
 public class Endereco implements Serializable{
 
 	private String rua;
-
 	private String uf;
-
 	private String cidade;
-	
-	private String bairro;
 
-	public Endereco(){
 
-	}
-
-	public Endereco(String rua, String uf, String cidade, String bairro) {
+	public Endereco(String rua, String uf, String cidade) {
 		this.rua = rua;
-		this.bairro = bairro;
 		this.uf = uf;
 		this.cidade = cidade;
 	}
 	
-	public Endereco(String rua, String bairro){
-		this.rua = rua;
-		this.bairro = bairro;
-	}
 
 	public String getRua() {
 		return this.rua;
@@ -38,10 +26,6 @@ public class Endereco implements Serializable{
 
 	public String getCidade() {
 		return this.cidade;
-	}
-	
-	public String getBairro(){
-		return this.bairro;
 	}
 	
 	
@@ -57,7 +41,4 @@ public class Endereco implements Serializable{
 		this.rua= rua;
 	}
 	
-	public void setBairro(String bairo){
-		this.bairro= bairro;
-	}
 }

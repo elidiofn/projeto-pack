@@ -11,6 +11,7 @@ public class Queixa implements Serializable{
 	private String descricao;
 
 	protected Pessoa solicitante;
+	protected Endereco endereco;
 
 	public int situacao; 
 	
@@ -19,6 +20,7 @@ public class Queixa implements Serializable{
 	public static final int FECHADA = 3;
 
 	private String comentario = "";
+
 	public Queixa(){
 		id=0;
 	}
@@ -30,10 +32,7 @@ public class Queixa implements Serializable{
 		this.descricao = descricao;
 		this.situacao = situacao;
 		this.comentario = comentario;
-		Endereco endereco = new Endereco();
-		endereco.setRua(rua);
-		endereco.setUf(uf);
-		endereco.setCidade(cidade);
+		this.endereco = new Endereco(rua,uf,cidade);
 		this.solicitante = new Pessoa(nome, email, endereco);
 	}
 

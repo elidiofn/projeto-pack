@@ -13,7 +13,6 @@ public class UnidadeSaude implements Serializable{
 
     private String rua;
     private String bairro;
-    
     private String nome; 
 
     private List especialidades = new ArrayList();

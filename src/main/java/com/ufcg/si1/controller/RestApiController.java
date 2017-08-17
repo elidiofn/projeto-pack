@@ -68,9 +68,6 @@ public class RestApiController {
         return new ResponseEntity<UnidadeSaude>(unit, HttpStatus.CREATED);
     }
     
-    
-     
-
 
     @RequestMapping(value = "/queixa/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> consultarQueixa(@PathVariable("id") long id) {
