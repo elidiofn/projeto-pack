@@ -8,7 +8,10 @@ public class Endereco implements Serializable{
 	private String uf;
 	private String cidade;
 
-
+	public Endereco(){
+		super();
+	}
+	
 	public Endereco(String rua, String uf, String cidade) {
 		this.rua = rua;
 		this.uf = uf;

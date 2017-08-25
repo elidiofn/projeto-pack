@@ -1,22 +1,37 @@
 package com.ufcg.si1.service;
 
+import java.util.Iterator;
+import java.util.List;
+
+import com.ufcg.si1.model.UnidadeSaude;
+
 import exceptions.ObjetoInexistenteException;
 import exceptions.ObjetoJaExistenteException;
 import exceptions.Rep;
 
-import java.util.List;
-
 
 public interface UnidadeSaudeService {
-    Object procura(int codigo) throws Rep, ObjetoInexistenteException;
 
-    List<Object> getAll();
+	Iterator<UnidadeSaude> getIterator();
 
-    void insere(Object us)throws Rep, ObjetoJaExistenteException;
+	Object findByBairro(String bairro);
 
-    boolean existe(int codigo);
+	Object findByCodigo(int codigo);
+	
+	void saveUS(UnidadeSaude unidade) throws Rep, ObjetoJaExistenteException;
 
-    Object findById(long id);
+	boolean existe(int codigo);
 
-    Object findByBairro(String bairro);
+	void salvaDados();
+
+	List<UnidadeSaude> findAllUS();
+
+	void updateUS(UnidadeSaude unidade);
+
+	void deleteUSByCodigo(int codigo);
+
+	void deleteAllUsers();
+
+	List<Object> getAll();
+
 }

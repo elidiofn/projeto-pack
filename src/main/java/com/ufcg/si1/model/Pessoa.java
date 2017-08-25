@@ -4,15 +4,13 @@ import java.io.Serializable;
 
 public class Pessoa implements Serializable{
 	private String nome;
-	private Endereco endereço;
 	private String email;
 
 	public Pessoa(){
 		super();
 	}
 
-	public Pessoa(String nome, String email, Endereco endereco) {
-		this.endereço = endereco;
+	public Pessoa(String nome, String email) {
 		this.nome = nome;
 		this.email = email;
 	}
@@ -31,14 +29,6 @@ public class Pessoa implements Serializable{
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public Endereco getEndereço() {
-		return endereço;
-	}
-
-	public void setEndereço(Endereco endereço) {
-		this.endereço = endereço;
 	}
 	
 	

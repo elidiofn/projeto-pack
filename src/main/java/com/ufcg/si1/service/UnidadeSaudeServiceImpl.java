@@ -1,7 +1,11 @@
 package com.ufcg.si1.service;
 
 import br.edu.ufcg.Hospital;
+
+import com.ufcg.si1.model.Queixa;
 import com.ufcg.si1.model.UnidadeSaude;
+import com.ufcg.si1.util.Deserializador;
+import com.ufcg.si1.util.Serializador;
 
 import exceptions.ObjetoInexistenteException;
 import exceptions.ObjetoJaExistenteException;
@@ -10,90 +14,86 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 @Service("unidadeSaudeService")
 public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
-	private Object[] vetor;
-	private List<Object> lista;
-	private int indice;
 
-	private int geraCodigo = 0; // para gerar codigos das queixas cadastradas
+    private static List<UnidadeSaude> unidadesDeSaude;
 
-	public UnidadeSaudeServiceImpl() {
-		lista = new ArrayList<>();
-		vetor = new Object[100];
-		indice = 0;
-	}
-
-	@Override
-	public Object procura(int codigo) throws Rep, ObjetoInexistenteException {
-		int i = 0;
-		while (i < indice) {
-			if (lista.get(i) instanceof UnidadeSaude) {
-				UnidadeSaude unidadeSaude = (UnidadeSaude) lista.get(i);
-				if (unidadeSaude.pegaCodigo() == codigo) {
-					return lista.get(i);
-				}
-			} else if (lista.get(i) instanceof Hospital) {
-				Hospital hospital = (Hospital) lista.get(i);
-				if (hospital.getCodigo() == codigo) {
-					return lista.get(i);
-				}
-			}
-			i++;
+    static {
+        unidadesDeSaude = populateDummyUS();
+        carregarDados();
+    }
+	
+    public static void carregarDados(){
+    	Deserializador d = new Deserializador();
+    	try{
+    		ArrayList<UnidadeSaude> lista= (ArrayList<UnidadeSaude>) d.deserializar("./src/arquivos/US.bd");
+    		if(lista != null){
+    			unidadesDeSaude =lista;
+    		}
+    	}catch (Exception e) {
+    		System.out.println("Erro"+e.getMessage());
 		}
-		throw new ObjetoInexistenteException("Não achou unidade");
-	}
+    	
+    }
 
+    @Override
+    public void salvaDados(){
+    	Serializador s = new Serializador();
+    	try {
+			s.serializar("./src/arquivos/US.bd", unidadesDeSaude);
+		} catch (Exception e) {
+			System.out.println("Erro"+e.getMessage());
+		}
+    }
+    
+    private static List<UnidadeSaude> populateDummyUS() {
+        List<UnidadeSaude> unidadesDeSaude = new ArrayList<UnidadeSaude>();
+
+        unidadesDeSaude.add(new UnidadeSaude(unidadesDeSaude.size(), "Mini Trauma", "Rua dos doentes", "Bairro aquieagora"));
+
+        return unidadesDeSaude;
+    }
+    
 	@Override
 	public List<Object> getAll() {
-		return Arrays.asList(vetor);
+		return Arrays.asList(unidadesDeSaude);
 	}
-
-	@Override
-	public void insere(Object us) throws Rep, ObjetoJaExistenteException {
-
-		if (us == null) {
-			throw new Rep("Erro!");
-		} else {
-			if (us instanceof UnidadeSaude) {
-				((UnidadeSaude) us).mudaCodigo(++geraCodigo);
-			} else {
-				((Hospital) us).setCodigo(++geraCodigo);
-			}
+    
+   
+    
+    @Override
+    public List<UnidadeSaude> findAllUS() {
+        return unidadesDeSaude;
+    }
+    
+    @Override
+    public void saveUS(UnidadeSaude unidade) throws Rep, ObjetoJaExistenteException {
+    	
+    	if (unidade == null){
+    		throw new Rep("Erro!");
+    	}
+    	// ajeitar aqui depois, n é contains pq cada obj é um hashcode diferente
+		if (unidadesDeSaude.contains(unidade)) {
+			throw new ObjetoJaExistenteException("Objeto jah existe no array");
 		}
-/*
-		if (indice == this.vetor.length) {
-			throw new Rep("Erro ao incluir no array");
-		}
-*/
-		if (us instanceof UnidadeSaude) {
-			UnidadeSaude unidadeSaude = (UnidadeSaude) us;
-			if (this.existe(unidadeSaude.pegaCodigo())) {
-				throw new ObjetoJaExistenteException("Objeto jah existe no array");
-			}
-		} else if (us instanceof Hospital) {
-			Hospital hospital = (Hospital) us;
-			if (this.existe(hospital.getCodigo())) {
-				throw new ObjetoJaExistenteException("Objeto jah existe no array");
-			}
-		}
-		this.lista.add(us);
-/*
-		this.vetor[indice] = us;
-		indice++;*/
-	}
+		
 
+        unidade.setCodigo(unidadesDeSaude.size());
+        unidadesDeSaude.add(unidade);
+        this.salvaDados();
+    }
+		
 	@Override
 	public boolean existe(int codigo) {
 		boolean existe = false;
-
-		//for (int i = 0; i < indice; i++) {
-		for(Object o : lista){
+		for(Object o : unidadesDeSaude){
 			if (o instanceof UnidadeSaude) {
 				UnidadeSaude unidadeSaude = (UnidadeSaude) o;
-				if (unidadeSaude.pegaCodigo() == codigo) {
+				if (unidadeSaude.getCodigo() == codigo) {
 					existe = true;
 					break;
 				}
@@ -105,30 +105,40 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
 				}
 			}
 		}
-
 		return existe;
 	}
+    
+	@Override
+    public void updateUS(UnidadeSaude unidade) {
+        int index = unidadesDeSaude.indexOf(unidade);
+        unidadesDeSaude.set(index, unidade);
+    }
+    
+	@Override
+    public void deleteUSByCodigo(int codigo) {
 
-	public Object findById(long id) {
-		for (Object esp : lista) {
-			if (esp instanceof UnidadeSaude) {
-				UnidadeSaude unidadeSaude = (UnidadeSaude) esp;
-				if (unidadeSaude != null && unidadeSaude.pegaCodigo() == id) {
-					return unidadeSaude;
-				}
-			} else if (esp instanceof Hospital) {
-				Hospital hospital = (Hospital) esp;
-				if (hospital != null && hospital.getCodigo() == id) {
-					return hospital;
-				}
-			}
-		}
-		return null;
-	}
+        for (Iterator<UnidadeSaude> iterator = unidadesDeSaude.iterator(); iterator.hasNext(); ) {
+            UnidadeSaude u = iterator.next();
+            if (u.getCodigo() == codigo) {
+                iterator.remove();
+            }
+        }
+    }
 
+    @Override
+    public Iterator<UnidadeSaude> getIterator() {
+        return unidadesDeSaude.iterator();
+    }
+    
+    @Override
+    public void deleteAllUsers() {
+        unidadesDeSaude.clear();
+    }
+    
+    
 	@Override
 	public Object findByBairro(String bairro) {
-		for (Object esp : lista) {
+		for (Object esp : unidadesDeSaude) {
 			if (esp instanceof UnidadeSaude) {
 				;
 				UnidadeSaude u = (UnidadeSaude) esp;
@@ -144,4 +154,23 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
 		}
 		return null;
 	}
+	
+	@Override
+	public Object findByCodigo(int codigo) {
+		for (Object esp : unidadesDeSaude) {
+			if (esp instanceof UnidadeSaude) {
+				UnidadeSaude unidadeSaude = (UnidadeSaude) esp;
+				if (unidadeSaude != null && unidadeSaude.getCodigo() == codigo) {
+					return unidadeSaude;
+				}
+			} else if (esp instanceof Hospital) {
+				Hospital hospital = (Hospital) esp;
+				if (hospital != null && hospital.getCodigo() == codigo) {
+					return hospital;
+				}
+			}
+		}
+		return null;
+	}
+	
 }

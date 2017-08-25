@@ -8,6 +8,7 @@ public class Queixa implements Serializable{
 
 	private long id;
 
+	private String flag = "alimenticia";
 	private String descricao;
 
 	protected Pessoa solicitante;
@@ -21,10 +22,6 @@ public class Queixa implements Serializable{
 
 	private String comentario = "";
 
-	public Queixa(){
-		id=0;
-	}
-
 	public Queixa(long id, String descricao, int situacao, String comentario,
                   String nome, String email,
 				  String rua, String uf, String cidade) {
@@ -33,9 +30,25 @@ public class Queixa implements Serializable{
 		this.situacao = situacao;
 		this.comentario = comentario;
 		this.endereco = new Endereco(rua,uf,cidade);
-		this.solicitante = new Pessoa(nome, email, endereco);
+		this.solicitante = new Pessoa(nome, email);
+	}
+	
+	public Queixa(){
+		id = 0;
+	}
+	
+	public Endereco getEndereco() {
+		return endereco;
 	}
 
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
+	public void setSituacao(int situacao) {
+		this.situacao = situacao;
+	}
+	
 	public long getId() {
 		return id;
 	}
@@ -86,6 +99,14 @@ public class Queixa implements Serializable{
 
 	public void setSolicitante(Pessoa solicitante) {
 		this.solicitante = solicitante;
+	}
+	
+	public String getFlag() {
+		return flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag;
 	}
 
 	@Override

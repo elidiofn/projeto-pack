@@ -28,11 +28,13 @@ public class UnidadeSaude implements Serializable{
         this.codigo = 0; // gerado no repositorio
         this.setNome(nome);
     }
-    public UnidadeSaude(String nome, String rua, String bairro){
+    public UnidadeSaude(int codigo, String nome, String rua, String bairro){
     	
-    	this.rua =rua;
-    	this.bairro=bairro;
-    	this.setNome(nome);
+    	this.codigo = codigo;
+    	this.nome = nome;
+    	this.rua = rua;
+    	this.bairro = bairro;
+    	
     }
 	
 	public String getBairro() {
@@ -58,11 +60,11 @@ public class UnidadeSaude implements Serializable{
         this.especialidades.add(esp);
     }
 
-    public int pegaCodigo() {
+    public int getCodigo() {
         return this.codigo;
     }
 
-    public void mudaCodigo(int cod) {
+    public void setCodigo(int cod) {
         this.codigo = cod;
     }
 	public String getNome() {

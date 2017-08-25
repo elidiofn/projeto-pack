@@ -27,7 +27,7 @@ public class QueixaServiceImpl implements QueixaService {
     	try{
     		ArrayList<Queixa> lista= (ArrayList<Queixa>) d.deserializar("./src/arquivos/queixas.bd");
     		if(lista != null){
-    			queixas =lista;
+    			queixas = lista;
     		}
     	}catch (Exception e) {
     		System.out.println("Erro"+e.getMessage());

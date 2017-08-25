@@ -2,6 +2,7 @@ package com.ufcg.si1.model;
 
 public class QueixaAnimal extends Queixa{
 
+	private String flag = "animal";
 	private String tipoDoAnimal;
 	protected Endereco endereco;
 
@@ -11,7 +12,7 @@ public class QueixaAnimal extends Queixa{
 		super(id,descricao,situacao,comentario, nome, email, rua, uf, cidade);
 		this.tipoDoAnimal = tipoDoAnimal;
 		this.endereco = new Endereco(rua,uf,cidade);
-		this.solicitante = new Pessoa(nome, email, endereco);
+		this.solicitante = new Pessoa(nome, email);
 	}
 	
 	public String getTipoDoAnimal() {
@@ -21,5 +22,6 @@ public class QueixaAnimal extends Queixa{
 	public void setTipoDoAnimal(String tipoDoAnimal) {
 		this.tipoDoAnimal = tipoDoAnimal;
 	}
+	
 	
 }
