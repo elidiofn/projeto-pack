@@ -1,6 +1,7 @@
 package com.ufcg.si1.service;
 
 import com.ufcg.si1.model.Queixa;
+
 import com.ufcg.si1.util.Deserializador;
 import com.ufcg.si1.util.Serializador;
 
@@ -9,13 +10,19 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 
 @Service("queixaService")
 public class QueixaServiceImpl implements QueixaService {
 
     private static List<Queixa> queixas;
+    private int numQueixasFechadas = 0;
+    private int numQueixasAbertas = 0;
+    private int numQueixasAndamento = 0;
+	public static final int ABERTA = 1;
+	public static final int EM_ANDAMENTO = 2;
+	public static final int FECHADA = 3;
+    
 
     static {
         queixas = populateDummyQueixas();
@@ -34,6 +41,21 @@ public class QueixaServiceImpl implements QueixaService {
 		}
     	
     }
+    
+    public void calculaNumQueixas(){
+    	for(int i = 0; i < queixas.size(); i++){
+    		if (queixas.get(i).getSituacao() == ABERTA){
+    			numQueixasAbertas ++;
+    		}else if (queixas.get(i).getSituacao() == FECHADA){
+    			numQueixasFechadas ++;
+    		}else{
+    			numQueixasAndamento ++;
+    		}
+    		
+    	}
+    	
+    }
+    
     public void salvaDados(){
     	Serializador s = new Serializador();
     	try {

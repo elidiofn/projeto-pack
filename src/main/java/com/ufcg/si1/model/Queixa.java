@@ -8,7 +8,6 @@ public class Queixa implements Serializable{
 
 	private long id;
 
-	private String flag = "alimenticia";
 	private String descricao;
 
 	protected Pessoa solicitante;
@@ -101,13 +100,6 @@ public class Queixa implements Serializable{
 		this.solicitante = solicitante;
 	}
 	
-	public String getFlag() {
-		return flag;
-	}
-
-	public void setFlag(String flag) {
-		this.flag = flag;
-	}
 
 	@Override
 	public int hashCode() {

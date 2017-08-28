@@ -2,7 +2,7 @@ package com.ufcg.si1.model;
 
 public class QueixaAnimal extends Queixa{
 
-	private String flag = "animal";
+
 	private String tipoDoAnimal;
 	protected Endereco endereco;
 
