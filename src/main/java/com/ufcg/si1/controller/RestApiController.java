@@ -152,14 +152,13 @@ public class RestApiController {
     
     @RequestMapping(value = "/prefeitura", method = RequestMethod.GET)
     public ResponseEntity<Prefeitura> getSituacao() {
-    	System.out.println("requisição chegando");
         return new ResponseEntity<Prefeitura>(prefeitura, HttpStatus.OK);
     }
 
 
     @RequestMapping(value = "/prefeitura", method = RequestMethod.PUT)
     public ResponseEntity<Prefeitura> setSituacao(@RequestBody Prefeitura pref, UriComponentsBuilder ucBuilder) {
-    	System.out.println("requisição chegando");
+
     	prefeitura.setSituacao(pref.getSituacao());
     	
          return new ResponseEntity<Prefeitura>(prefeitura, HttpStatus.OK);
