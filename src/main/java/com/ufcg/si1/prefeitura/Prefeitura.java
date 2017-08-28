@@ -8,6 +8,10 @@ public class Prefeitura {
 		this.situacao = situacao;
 	}
 	
+	public Prefeitura(){
+		
+	}
+	
 	public int getSituacao() {
 		return situacao;
 	}
